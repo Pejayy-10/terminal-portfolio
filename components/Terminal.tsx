@@ -108,7 +108,7 @@ export default function Terminal() {
                   Type: Full Stack Developer | Status: Available for hire
                 </div>
                 <div className="text-green-300 typing-animation delay-3000">
-                  Last login: {mounted ? currentDate : "loading..."} from localhost
+                  Last login: {mounted ? currentDate : "loading..."} from terminal
                 </div>
                 <div className="blinking-cursor mt-4 text-white">Press ENTER to access main interface...</div>
               </div>

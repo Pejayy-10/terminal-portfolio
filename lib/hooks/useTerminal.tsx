@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import SnakeGame from "../../components/SnakeGame"
 
 interface CommandHistoryEntry {
   command: string
@@ -380,12 +381,29 @@ export function useTerminal(): UseTerminalReturn {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex justify-center">
+          </div>          <div className="flex justify-center">
             <button className="bg-green-600/20 border border-green-400/50 hover:bg-green-600/30 text-green-400 font-mono py-2 px-6 rounded-md transition-colors">
               Download Resume.pdf
             </button>
+          </div>
+        </div>
+      ),
+    },
+    {
+      label: "Snake Game",
+      command: "6",
+      description: "Play the classic Snake game",
+      content: (
+        <div className="space-y-6">
+          <div className="border border-cyan-400/30 rounded-lg p-4 bg-gray-800/30">
+            <h3 className="text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              Snake Game
+            </h3>
+            <div className="text-gray-300 mb-4">
+              <p>Use WASD or Arrow keys to move. Press Space to pause/resume. Collect food to grow and increase your score!</p>
+            </div>
+            <SnakeGame />
           </div>
         </div>
       ),
@@ -399,13 +417,12 @@ export function useTerminal(): UseTerminalReturn {
   const clearHistory = () => {
     setCommandHistory([])
   }
-
   const handleCommand = (input: string) => {
     const command = input.trim().toLowerCase()
 
     addToHistory(command)
 
-    if (/^[1-5]$/.test(command)) {
+    if (/^[1-6]$/.test(command)) {
       const optionIndex = Number.parseInt(command) - 1
       if (optionIndex >= 0 && optionIndex < menuOptions.length) {
         setSelectedOption(menuOptions[optionIndex])
@@ -415,15 +432,14 @@ export function useTerminal(): UseTerminalReturn {
       }
     }
 
-    switch (command) {
-      case "clear":
+    switch (command) {      case "clear":
       case "cls":
         clearHistory()
         break
       case "help":
         addToHistory(
           "",
-          "Available commands: 0 (home), 1-5 (menu options), clear, help, about, skills, projects, contact, resume, home, back",
+          "Available commands: 0 (home), 1-6 (menu options), clear, help, about, skills, projects, contact, resume, game, home, back",
         )
         break
       case "about":
@@ -441,8 +457,7 @@ export function useTerminal(): UseTerminalReturn {
         setSplitViewOpen(true)
         addToHistory("", "Loading Projects Portfolio...")
         break
-      case "contact":
-        setSelectedOption(menuOptions[3])
+      case "contact":        setSelectedOption(menuOptions[3])
         setSplitViewOpen(true)
         addToHistory("", "Loading Contact Information...")
         break
@@ -450,6 +465,11 @@ export function useTerminal(): UseTerminalReturn {
         setSelectedOption(menuOptions[4])
         setSplitViewOpen(true)
         addToHistory("", "Loading System Information...")
+        break
+      case "game":
+        setSelectedOption(menuOptions[5])
+        setSplitViewOpen(true)
+        addToHistory("", "Loading Snake Game...")
         break
       case "exit":
       case "quit":
