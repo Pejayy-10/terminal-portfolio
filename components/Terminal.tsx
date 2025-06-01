@@ -73,7 +73,7 @@ export default function Terminal() {
   return (
     <div className="w-full max-w-7xl mx-auto h-[90vh] flex">
       <div
-        className={`bg-black/95 backdrop-blur-sm border-2 border-green-400/50 rounded-lg shadow-2xl shadow-green-500/20 transition-all duration-500 ${
+        className={`bg-black/95 backdrop-blur-sm border-2 border-green-400/50 rounded-lg shadow-2xl shadow-green-500/20 transition-all duration-500 flex flex-col ${
           splitViewOpen ? "w-1/2 mr-2" : "w-full"
         }`}
       >
@@ -89,7 +89,7 @@ export default function Terminal() {
           <div className="text-green-400/70 text-xs font-mono">{mounted ? currentTime : "--:--:--"}</div>
         </div>
 
-        <div className="p-4 h-full overflow-y-auto font-mono text-green-400 custom-scrollbar" ref={terminalRef}>
+        <div className="p-4 flex-1 overflow-y-auto font-mono text-green-400 custom-scrollbar" ref={terminalRef}>
           {stage === "intro" && (
             <div className="space-y-2">
               <div className="text-green-300 text-xs opacity-70">
